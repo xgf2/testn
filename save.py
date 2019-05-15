@@ -1,8 +1,7 @@
 import db
-from parse_list_news import parse_list_news
-from parse_news import parse_news
+from parse import parse_list_news, parse_news
 
-def save_news():
+def save_news_from_site_to_db():
 
     list_news = parse_list_news()
 
@@ -28,4 +27,4 @@ def save_news():
 
 
 if __name__ == '__main__':
-    save_news()
+    save_news_from_site_to_db()

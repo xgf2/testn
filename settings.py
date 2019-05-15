@@ -12,3 +12,5 @@ DB_PASSWORD = 'postgressuperuser'
 ADDRESS = '176.32.32.140'
 PORT = 8000
 
+# static settings
+CSS_PATH = 'news/static/css/'

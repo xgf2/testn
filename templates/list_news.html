@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block list_news %}
+<div>
+
+        {% for brief_news in list_news %}
+        <div class='link'>
+                <a href = '{{ brief_news[1] }}'> {{ brief_news[2] }} </a>
+        </div>
+        {% endfor %}
+</div>
+<br>
+<div class='divider'>
+
+</div>
+<div>
+
+        {% for elem_news in news %}
+        <div class='link'>
+                <a href = '{{ elem_news[1] }}'> {{ elem_news[2] }}  <p> {{ elem_news[4][0:300] + '...' }} </p></a>
+                {% if  elem_news[3] != None %}
+                <img src= {{ elem_news[3]}} height=120px>
+                {% endif %}
+        </div>
+        <div class='divider'>
+
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}
+

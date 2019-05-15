@@ -1,11 +1,38 @@
 import psycopg2
 import settings
 
+def delete_all_rows(table_name):
+
+    if table_name == 'list_news':
+        command = ('DELETE FROM %s;' % table_name)
+
+    elif table_name == 'news':
+        command = ('DELETE FROM %s;' % table_name)
+
+    return  action_over_table(command)
+
+def get_amount_rows(table_name, amount_rows):
+    if table_name == 'list_news':
+        command = ('SELECT * FROM %s ORDER BY date_news DESC LIMIT %s;' % (table_name, amount_rows))
+
+    elif table_name == 'news':
+        command = ('SELECT * FROM %s ORDER BY datetime_news DESC LIMIT %s;' % (table_name, amount_rows))
+
+    return  action_over_table(command)
+
+def get_all_rows(table_name):
+    if table_name == 'list_news':
+        command = ('SELECT * FROM %s ORDER BY date_news DESC;' % table_name)
+
+    elif table_name == 'news':
+        command = ('SELECT * FROM %s ORDER BY datetime_news DESC;' % table_name)
+
+    return  action_over_table(command)
+
 def get_row_on_column(table_name, column_name, value):
     
     command = 'SELECT ' + column_name + ' FROM ' + table_name + ' WHERE ' + column_name + ' = %s' 
-    result = action_over_table(command, [(value,)])
-    return result
+    return action_over_table(command, [(value,)])
 
 def add_rows(table_name, list_data):
 
@@ -37,7 +64,7 @@ def drop_tables():
 def action_over_table(commands, list_values = None):
 
     connect = None
-    result = None
+    result = []
 
     try:
         connect = psycopg2.connect('dbname = %s user = %s password = %s' % (settings.DB_NAME, settings.DB_USER, settings.DB_PASSWORD))
@@ -48,7 +75,9 @@ def action_over_table(commands, list_values = None):
                 try:
                     cursor.execute(commands, values)
                     if commands.find('INSERT'):
-                        result = cursor.fetchall()
+                        ret = cursor.fetchall()
+                        if len(ret) > 0:
+                            result += ret
                 except psycopg2.Error as e:
                     print('Error psycopg2: %s' % e)
                 except psycopg2.ProgrammingError as e:
@@ -61,6 +90,13 @@ def action_over_table(commands, list_values = None):
                 except psycopg2.Error as e:
                     print('Error psycopg2: %s' % e)
 
+        elif type(commands) == str:
+            try:
+                cursor.execute(commands)
+                result += cursor.fetchall()
+            except psycopg2.Error as e:
+                print('Error psycopg2: %s' % e)
+
         connect.commit()
 
     except psycopg2.DatabaseError as e:
@@ -72,7 +108,10 @@ def action_over_table(commands, list_values = None):
         if connect:
             connect.close()
 
-        return result
+        if len(result) > 0:
+            return result
+        else:
+            return None
 
 if  __name__ == '__main__':
     pass

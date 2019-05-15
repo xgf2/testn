@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+        <head>
+                <link rel='stylesheet' href='{{ static_css }}'>
+                <title>News</title>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <meta charset='UTF-8'>
+        </head>
+
+        <body>
+                <header>
+                        <h1> News</h1>
+                        {% block common_header %}
+                        {% endblock %}
+
+                </header>
+
+                <nav>
+                        <ul>
+                                {% block common_navigation %}
+                                <li class='dropdown'><a href = 'javascript:void(0)'> News </a>
+                                        <div class='dropdown-content'>
+                                                <a href = '/reload/site'> Reload from site (tables are cleaned) </a>
+                                                <a href = '/reload/db'> Reload from db</a>
+                                        </div>
+                                </li>
+                                {% endblock %}
+                        </ul>
+                </nav>
+
+                <section>
+                        {% block list_news%} {% endblock %}
+                </section>
+
+                <footer>
+                        <p> &#169; News 2019 </p>
+                </footer>
+
+        </body>
+</html>

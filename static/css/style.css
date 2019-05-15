@@ -1,0 +1,109 @@
+* {
+        box-sizing: border-box;
+}
+
+body {
+        font-family: Times, sans-serif;
+}
+
+/* Header */
+header {
+        background-color: #747672;
+        padding: 15px;
+        text-align: center;
+}
+
+/* Navigation */
+
+nav {
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+}
+
+ul {
+        margin: 0;
+        padding: 0;
+        background-color: #ddd7d7;
+        list-style-type: none;
+        overflow: hidden;
+}
+
+li {
+        float: left;
+}
+
+li a {
+        display: block;
+        text-decoration: none;
+        padding: 10px;
+        color: #000000;
+}
+
+li a:hover {
+        background-color: #2f302d;
+        color: #ffffff;
+}
+
+.dropdown {
+        display: block;
+}
+
+.dropdown-content {
+        margin: 0;
+        padding: 0;
+        background-color: #ddd7d7;
+        list-style-type: none;
+        overflow: hidden;
+        min-width: 10%;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+        display: none;
+        position: absolute;
+        z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+        display: block;
+}
+
+/* Section */
+
+section {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+}
+
+.link {
+        text-align: left;
+        padding: 4px;
+
+}
+
+div.link a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+} 
+
+div.link:hover {
+        background-color: #e8e3e3;
+}
+
+p {
+        font-weight: normal;
+}
+
+.divider {
+        height: 5px;
+        background-color: gray;
+}
+
+/* Footer */
+footer {
+        background-color: #ddd7d7;
+        padding: 10px;
+        text-align: center;
+}
